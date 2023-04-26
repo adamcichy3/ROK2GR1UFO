@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class PlayerController : MonoBehaviour
 {
+    public Text scoreText;
+    public Text winText;
     Rigidbody2D rb2d;
     private int count = 0;
     void Start()
     {
+
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -17,6 +23,7 @@ public class PlayerController : MonoBehaviour
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         rb2d.AddForce(movement * 15);
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +32,32 @@ public class PlayerController : MonoBehaviour
         {
             count++; //zwieksz wartosc o 1
             Destroy(collision.gameObject);
+            UpdateScoreText();
         }
     }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = "Wynik: " + count;
+        if (count == 3)
+        {
+            winText.gameObject.SetActive(true);
+            scoreText.gameObject.SetActive(false);
+            //Thread.Sleep(5000);
+            SceneManager.LoadScene("Level02");
+
+        }
+
+    }
+
+ 
+
+
+
+
+
+
+
+
+
 }
