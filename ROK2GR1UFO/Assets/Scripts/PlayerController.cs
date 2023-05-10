@@ -40,15 +40,27 @@ public class PlayerController : MonoBehaviour
     {
         scoreText.text = "Wynik: " + count;
         if (count == 3)
-        {
+        { 
             winText.gameObject.SetActive(true);
             scoreText.gameObject.SetActive(false);
-            //Thread.Sleep(5000);
-            SceneManager.LoadScene("Level02");
-
+            StartCoroutine(StopTime());
         }
-
     }
+
+    IEnumerator StopTime()
+    {
+        yield return new WaitForSeconds(5);
+        SceneManager.LoadScene("Level02");
+    }
+
+
+    
+
+
+
+    
+
+
 
  
 
