@@ -10,10 +10,11 @@ public class PlayerController : MonoBehaviour
     public Text scoreText;
     public Text winText;
     Rigidbody2D rb2d;
+    public float speed = 0;
     private int count = 0;
     void Start()
     {
-
+       
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -22,7 +23,8 @@ public class PlayerController : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        rb2d.AddForce(movement * 15);
+        rb2d.AddForce(movement * speed);
+
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
